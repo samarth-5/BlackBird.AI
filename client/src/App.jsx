@@ -8,6 +8,7 @@ import Prompt2Image from './Pages/Prompt2Image.jsx';
 import Header from './Components/Header.jsx';
 import ScrollToTop from './Components/ScrollToTop.jsx';
 import PrivateRoute from './Components/PrivateRoute.jsx';
+import About from './Pages/About.jsx';
 
 export default function App() {
   return (
@@ -16,11 +17,12 @@ export default function App() {
       <Header />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/' element={<SignIn />} />
-          <Route path='/' element={<SignUp />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/signin' element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route element={<PrivateRoute />}>
-            <Route path='/' element={<Chatbot />} />
-            <Route path='/' element={<Prompt2Image />} />
+            <Route path='/chatbot' element={<Chatbot />} />
+            <Route path='/prompt2image' element={<Prompt2Image />} />
           </Route>
         </Routes>
     </BrowserRouter>
