@@ -29,7 +29,7 @@ export default function SignUp() {
           <button className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Sign Up</button>
           <button className='flex justify-center items-center gap-2 text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'><FaGoogle className='mb-1 ' />Continue with Google</button> 
           <div className='flex gap-2 items-center'>
-            <p className='text-slate-500 text-sm'>Have an account?</p>
+            <p className='text-slate-500 text-sm'>Already have an account?</p>
             <Link to='/signin'>
               <span className='text-[#00ff31] text-sm'>Sign in</span>
             </Link>
