@@ -39,21 +39,23 @@ export const signin = async(req,res,next) =>{
     try{
         const validUser=await User.findOne({email});
         if(!validUser)
-        return next(errorHandler(404,'User not found!'));
+        return res.status(404)
+                  .json('User not found!');
         const validPassword=bcryptjs.compareSync(password,validUser.password);
         if(!validPassword)
-        return next(errorHandler(401,'Invalid password!'));
-        
-        const token=jwt.sign({id: validUser._id, isAdmin: validUser.isAdmin}, process.env.JWT_SECRET);
+        return res.status(401)
+                  .json('Wrong credentials!');        
+        //const token=jwt.sign({id: validUser._id, isAdmin: validUser.isAdmin}, process.env.JWT_SECRET);
         const {password:pass, ...rest}=validUser._doc;
         res.status(200)
-           .cookie('access_token',token,{
-            httpOnly:true,
-           })
-           .json(rest);
+        //    .cookie('access_token',token,{
+        //     httpOnly:true,
+        //    })
+           .json('Signin successfull!');
     }
     catch(err){
-        next(err);
+        res.status(401)
+           .json('Signin Unsuccessfull!');
     }
 }
 

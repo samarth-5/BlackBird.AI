@@ -1,9 +1,55 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { FaGoogle } from "react-icons/fa6";
 import { GiSpikedBall } from "react-icons/gi";
-import {Link} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom';
+
+import { toast } from 'react-toastify';
 
 export default function SignIn() {
+
+  const [formData,setFormData]=useState({});
+  const [errorMessage,setErrorMessage]=useState(null);
+  const [loading,setLoading]=useState(false);
+
+  const navigate=useNavigate();
+
+  const handleChange=(e)=>{
+    //console.log(e.target.value);
+    setFormData({...formData,[e.target.id]:e.target.value.trim()});
+  }
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    if(!formData.username || !formData.email || !formData.password)
+    {
+      return toast.error('Please fill out all fields!');
+    }
+    try{
+        setLoading(true);
+        setErrorMessage(null);
+        const res=await fetch('/api/user/signin',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(formData),
+      });
+      const data=await res.json();      
+      //console.log(data);
+      if (!res.ok) 
+      {
+        setLoading(false);
+        toast.error(data);
+        return setErrorMessage(data.message);
+      }   
+      toast.success(data);
+      setLoading(false);
+      navigate('/');
+    }
+    catch(err){
+      setErrorMessage(err.message);
+      setLoading(false);
+    }
+  }
+
   return (
     <section className='flex items-center justify-evenly mt-16'> 
       <div className='m-20'>
@@ -16,10 +62,10 @@ export default function SignIn() {
         </ul>
       </div>
       <div>
-        <form className='flex flex-col gap-4 m-20 p-10 outline outline-slate-600 rounded-xl'>
-          <input size={40} type="name" placeholder='Username' className='border border-slate-600 p-3 rounded-lg' id='username' />
-          <input type="email" placeholder='E-mail address' className='border border-slate-600 p-3 rounded-lg' id='email' />
-          <input type="password" placeholder='Password' className='border border-slate-600 p-3 rounded-lg' id='password' />
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4 m-20 p-10 outline outline-slate-600 rounded-xl'>
+          <input size={40} type="name" placeholder='Username' className='border border-slate-600 p-3 rounded-lg' id='username' onChange={handleChange} />
+          <input type="email" placeholder='E-mail address' className='border border-slate-600 p-3 rounded-lg' id='email' onChange={handleChange} />
+          <input type="password" placeholder='Password' className='border border-slate-600 p-3 rounded-lg' id='password' onChange={handleChange} />
           <button type='submit' className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Sign In</button>
           <button className='flex justify-center items-center gap-2 text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'><FaGoogle className='mb-1 ' />Continue with Google</button> 
           <div className='flex gap-2 items-center'>

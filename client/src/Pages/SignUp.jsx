@@ -3,6 +3,8 @@ import { FaGoogle } from "react-icons/fa6";
 import { GiSpikedBall } from "react-icons/gi";
 import {Link, useNavigate} from 'react-router-dom'
 
+import { toast } from 'react-toastify';
+
 export default function SignUp() {
 
   const [formData,setFormData]=useState({});
@@ -20,11 +22,11 @@ export default function SignUp() {
     e.preventDefault();
     if(!formData.name || !formData.username || !formData.email || !formData.password || !formData.pwd)
     {
-      return setErrorMessage('Please fill out all fields!');
+      return toast.error('Please fill out all fields!');
     }
     if(formData.password !== formData.pwd)
     {
-      return setErrorMessage('Password does not match!');
+      return toast.error('Password does not match!');
     }
     try{
         setLoading(true);
@@ -39,8 +41,10 @@ export default function SignUp() {
       if (!res.ok) 
       {
         setLoading(false);
+        toast.error(data);
         return setErrorMessage(data.message);
       }   
+      toast.success(data);
       setLoading(false);
       navigate('/signin');
     }
