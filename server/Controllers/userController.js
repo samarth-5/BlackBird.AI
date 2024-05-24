@@ -25,7 +25,8 @@ export const signup = async(req,res,next) =>{
            .json('Signup successfull!');
     }
     catch(err){
-        next(err);
+        res.status(402)
+           .json('User already exists!');
     }
 }
 
