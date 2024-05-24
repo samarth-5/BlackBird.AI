@@ -8,4 +8,22 @@
     background-color: black;
     color: white;
     font-family: "Josefin Sans", sans-serif;
+    user-select: none;
+}
+
+::-webkit-scrollbar {
+    width: 6px;  
+}
+  
+::-webkit-scrollbar-track {
+background: #000;  
+}
+  
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+  background: #454545;
 }

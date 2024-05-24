@@ -16,7 +16,7 @@ export default function SignUp() {
         </ul>
       </div>
       <div>
-        <form className='flex flex-col gap-4 m-16 p-10 outline outline-slate-600'>
+        <form className='flex flex-col gap-4 m-16 p-10 outline outline-slate-600 rounded-xl'>
           <input type="text" size={40} placeholder='Full Name' className='border border-slate-600 p-3 rounded-lg' id='name' />
           <input type="email" placeholder='E-mail address' className='border border-slate-600 p-3 rounded-lg' id='email' />
           <input type="name" placeholder='Username' className='border border-slate-600 p-3 rounded-lg' id='username' />
