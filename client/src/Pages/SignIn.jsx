@@ -20,7 +20,7 @@ export default function SignIn() {
           <input size={40} type="name" placeholder='Username' className='border border-slate-600 p-3 rounded-lg' id='username' />
           <input type="email" placeholder='E-mail address' className='border border-slate-600 p-3 rounded-lg' id='email' />
           <input type="password" placeholder='Password' className='border border-slate-600 p-3 rounded-lg' id='password' />
-          <button className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Sign In</button>
+          <button type='submit' className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Sign In</button>
           <button className='flex justify-center items-center gap-2 text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'><FaGoogle className='mb-1 ' />Continue with Google</button> 
           <div className='flex gap-2 items-center'>
             <p className='text-slate-500 text-sm'>Don't have an account?</p>
