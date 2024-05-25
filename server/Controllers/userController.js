@@ -46,12 +46,12 @@ export const signin = async(req,res,next) =>{
         return res.status(401)
                   .json('Wrong credentials!');        
         const token=jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
-        //const {password:pass, ...rest}=validUser._doc;
+        const {password:pass, ...rest}=validUser._doc;
         res.status(200)
            .cookie('access_token',token,{
             httpOnly:true,
            })
-           .json('Signin Successfull!');
+           .json(rest);
     }
     catch(err){
         res.status(401)
@@ -79,12 +79,12 @@ export const google=async(req,res,next)=>{
         {
             //console.log(user);
             const token=jwt.sign({id: user._id}, process.env.JWT_SECRET);
-            //const {password, ...rest}=user._doc;
+            const {password, ...rest}=user._doc;
             res.status(200)
                .cookie('access_token',token,{
                 httpOnly:true,
                })
-               .json('Signin Successfull!');
+               .json(rest);
         }
         else
         {
@@ -99,11 +99,11 @@ export const google=async(req,res,next)=>{
             await newUser.save();
             const token=jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
             const {password, ...rest}=newUser._doc;
-            res.status(200)
+            res.status(201)
                .cookie('access_token',token,{
                 httpOnly:true,
                })
-               .json('Account created successfully!');
+               .json(rest);
         }
     }
     catch(err){

@@ -35,7 +35,10 @@ export default function GoogleAuth() {
             {
                 dispatch(signInSuccess(data));
                 navigate('/');
-                toast.success(data);
+                if(res.status===200)
+                toast.success('Signin successfull!');
+                if(res.status===201)
+                toast.success('Account created successfully!');
             }
         }
         catch(err){
