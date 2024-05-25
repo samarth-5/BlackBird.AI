@@ -1,9 +1,12 @@
 import React from 'react'
 import eagle from '../Assets/eagle.jpeg';
 import c1 from '../Assets/c1.jpg';
+import c3 from '../Assets/c3.jpg';
+import c2 from '../Assets/c2.png';
 import {Link} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { FaArrowCircleRight } from "react-icons/fa";
+import { FaRegCopyright } from "react-icons/fa6";
 
 export default function Home() {
 
@@ -24,10 +27,10 @@ export default function Home() {
           <button className='text-[#00ff31] mb-14 text-lg outline rounded-full p-2 px-5 pb-1 hover:text-black hover:bg-[#00ff31]'>Try Demo for Free</button>
         </Link>
       </div>
-      <div className='flex justify-center w-full gap-14 p-10'>
+      <div className='flex justify-center w-full gap-14 p-10 mb-10'>
         <div className='flex flex-col items-center outline w-1/4 rounded-3xl hover:outline-[#00ff31]'>
           <div>
-            <img src={c1} alt="img" className='rounded-3xl' />
+            <img src={c1} alt="img" className='rounded-t-3xl h-[220px] w-full' />
             <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - ASTRA v-5.1</h3>
             <p className='p-3 pt-0'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati temporibus neque, odio veritatis odit molestias culpa eius iste nobis, enim molestiae? Repudiandae veniam at, commodi molestias repellat nobis quaerat inventore!
@@ -39,7 +42,7 @@ export default function Home() {
         </div>
         <div className='flex flex-col items-center outline w-1/4 rounded-3xl hover:outline-[#00ff31]'>
           <div>
-            <img src={c1} alt="img" className='rounded-3xl' />
+            <img src={c2} alt="img" className='rounded-t-3xl h-[220px] w-full' />
             <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - ASTRA v-5.1</h3>
             <p className='p-3 pt-0'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati temporibus neque, odio veritatis odit molestias culpa eius iste nobis, enim molestiae? Repudiandae veniam at, commodi molestias repellat nobis quaerat inventore!
@@ -50,11 +53,14 @@ export default function Home() {
           </Link>
         </div>
         <div className='flex flex-col items-center outline w-1/4 rounded-3xl hover:outline-[#00ff31]'>
-          <img src={c1} alt="img" className='rounded-3xl' />
+          <img src={c3} alt="img" className='rounded-t-3xl h-[220px] w-full' />
           <h3 className='text-center cursor-pointer font-bold text-2xl p-5 hover:text-[#00ff31] hover:underline'>More features coming soon...!!<br />
                    Till then explore our new latest models...</h3>      
           <FaArrowCircleRight size={50} className='cursor-pointer' />          
         </div>
+      </div>
+      <div className='mb-5'>
+        <h2 className='flex justify-center text-[20px] items-center gap-2'><FaRegCopyright className='pt-1' />Made with &hearts; by Samarth</h2>
       </div>
     </section>
   )

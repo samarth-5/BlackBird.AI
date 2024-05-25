@@ -1,7 +1,21 @@
 import User from "../Models/userModel.js";
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-export const getOldMessages = async() => {}
+export const getOldMessages = async(req,res) => {
+    try{
+      //console.log(req.params);
+      const existingUser=await User.findById(req.params.id);
+      if(!existingUser)
+      {
+          return res.status(404).json({message:'User does not exist!'});
+      }
+      const chats=existingUser.chats;
+      res.status(200).json(chats);
+    }
+    catch(err){
+       next(err);
+    }
+}
 
 export const generateChatCompletion = async(req,res) => {
 
@@ -38,4 +52,12 @@ export const generateChatCompletion = async(req,res) => {
     run();
 }
 
-export const deleteChat = () => {}
+export const deleteChat=async(req,res)=>{
+  try{
+      const updatedUser=await User.findByIdAndUpdate(req.params.id,{$set: {chats: []}},{new: true});
+      res.status(200).json(updatedUser);
+  }
+  catch(err){
+    console.log(err);
+  }
+}

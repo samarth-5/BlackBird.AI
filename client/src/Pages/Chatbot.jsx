@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import px from '../Assets/px.jpg'
 import { BiSend } from "react-icons/bi";
 import {useSelector} from 'react-redux';
 import { toast } from 'react-toastify';
+import ChatItem from '../Components/ChatItem.jsx';
 
 export default function Chatbot() {
 
@@ -10,7 +11,39 @@ export default function Chatbot() {
   const [chatMessages,setChatMessages] = useState([]);
 
   const user=useSelector((state)=>state.user);
-  //console.log(user);
+
+  const firstLetter=user.currentUser.name.charAt(0).toUpperCase();
+
+  const handleDelete=async()=>{
+    try{
+      const res=await fetch(`/api/chat/delete/${user.currentUser._id}`,{
+        method:'PUT',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(user)
+      });
+      if(!res.ok)
+      return toast.error('Deleting conversations failed!');
+      toast.success('Conversation Deleted!');
+      setChatMessages([]);
+    }
+    catch(err){
+      toast.error(err);
+    }
+  }
+
+  useEffect(()=>{
+    const getOldMessages=async()=>{
+      try{
+        const res=await fetch(`/api/chat/old/${user.currentUser._id}`);
+        const data=await res.json();
+        setChatMessages(data);
+      }
+      catch(err){
+        return toast.error('Unable to fetch older chats!');
+      }
+    }
+    getOldMessages();
+  },[]);
 
   const handleChange=(e)=>{
     setFormData(e.target.value);
@@ -58,7 +91,7 @@ export default function Chatbot() {
             Education, etc. <br />
             Avoid sharing personal information !
           </p>
-          <button className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Delete Conversation</button>
+          <button onClick={handleDelete} className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Delete Conversation</button>
         </div>
         <div className='flex justify-center'>
           <img src={px} alt="bird" width={200} />
@@ -66,9 +99,17 @@ export default function Chatbot() {
       </div>
       <div className='w-3/4'>
         <h1 className='text-[40px] hover:text-[#00ff31] text-bold text-center'>MODEL - ASTRA v-5.1</h1>
-        <div className='outline rounded-2xl outline-slate-600 m-1 h-full'>
-          
-          <div className='flex items-center rounded-xl outline outline-slate-600 hover:outline-[#00ff31] relative top-[552px] m-2'>
+        <div className='outline rounded-2xl outline-slate-600 m-1 p-1'>
+          <div className='h-[512px]'>
+          {
+            chatMessages && chatMessages.map((chat)=>(
+              <div key={chat._id}>
+                <ChatItem role={chat.role} content={chat.content} firstLetter={firstLetter} key={chat._id} />
+              </div>
+            ))
+          }
+          </div>          
+          <div className='flex items-center rounded-xl outline outline-slate-600 hover:outline-[#00ff31] m-2'>
             <input placeholder='Type your message...' type="text" className='text-[#00ff31] w-full p-3 rounded-xl outline-none'
                    required onChange={handleChange} onKeyDown={(e)=>{if(e.key==='Enter') handleSubmit();}} />
             <BiSend size={40} className='pr-2 hover:text-green cursor-pointer' onClick={handleSubmit} />
