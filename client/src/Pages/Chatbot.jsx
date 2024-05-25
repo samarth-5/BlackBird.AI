@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import px from '../Assets/px.jpg'
 import { BiSend } from "react-icons/bi";
 import {useSelector} from 'react-redux';
+import { toast } from 'react-toastify';
 
 export default function Chatbot() {
 
   const [formData,setFormData] = useState(null);
+  const [chatMessages,setChatMessages] = useState([]);
 
   const user=useSelector((state)=>state.user);
   //console.log(user);
@@ -15,9 +17,35 @@ export default function Chatbot() {
   }
 
   const handleSubmit=async()=>{
-    if(!formData || formData==null)
+    if(!formData || formData===null || formData==='')
     {
       return toast.error('Type something...');
+    }
+    const newMessage={role:'user' , content:formData , id:user.currentUser._id}; 
+    //console.log(newMessage);
+    setChatMessages([...chatMessages,newMessage]);
+    setFormData('');
+
+    const resAi=await sendChatRequest(newMessage);
+    setChatMessages([...chatMessages,newMessage,resAi]);
+  }
+
+  const sendChatRequest = async(message)=>{
+    try{
+      const res=await fetch('/api/chat/new',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(message)
+      });
+      if(!res.ok)
+      return toast.error('Try some custom input!');
+      const data=await res.json();
+      const newMessage={role:'ai', content:data, id:user.currentUser._id};
+      //console.log(newMessage);
+      return newMessage;
+    }
+    catch(err){
+      return toast.error(err);
     }
   }
 

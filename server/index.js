@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import userRoutes from './Routes/userRoute.js';
+import chatRoutes from './Routes/chatRoute.js';
 
 dotenv.config();
 
@@ -23,3 +24,4 @@ app.get("/test",(req,res,next)=>{
 });
 
 app.use("/api/user",userRoutes);
+app.use("/api/chat",chatRoutes);
