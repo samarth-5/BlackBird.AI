@@ -1,20 +1,18 @@
 import React, {useState} from 'react'
-import { FaGoogle } from "react-icons/fa6";
 import { GiSpikedBall } from "react-icons/gi";
 import {Link, useNavigate} from 'react-router-dom'
 
 import { toast } from 'react-toastify';
+import GoogleAuth from '../Components/GoogleAuth';
 
 export default function SignUp() {
 
   const [formData,setFormData]=useState({});
-  const [errorMessage,setErrorMessage]=useState(null);
   const [loading,setLoading]=useState(false);
 
   const navigate=useNavigate();
 
   const handleChange=(e)=>{
-    //console.log(e.target.value);
     setFormData({...formData,[e.target.id]:e.target.value.trim()});
   }
 
@@ -30,27 +28,22 @@ export default function SignUp() {
     }
     try{
         setLoading(true);
-        setErrorMessage(null);
         const res=await fetch('/api/user/signup',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(formData),
       });
-      const data=await res.json();      
-      //console.log(data);
+      const data=await res.json();  
+      setLoading(false);
       if (!res.ok) 
       {
-        setLoading(false);
-        toast.error(data);
-        return setErrorMessage(data.message);
+        return toast.error(data);
       }   
       toast.success(data);
-      setLoading(false);
       navigate('/signin');
     }
     catch(err){
-      setErrorMessage(err.message);
-      setLoading(false);
+      return toast.error(err.message);
     }
   }
 
@@ -77,7 +70,7 @@ export default function SignUp() {
             <label className='text-sm'>I would like to receive communications from<br /> Blackbird.AI according to the Privacy Policy.**</label>
           </div>
           <button type='submit' className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Sign Up</button>
-          <button className='flex justify-center items-center gap-2 text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'><FaGoogle className='mb-1 ' />Continue with Google</button> 
+          <GoogleAuth />
           <div className='flex gap-2 items-center'>
             <p className='text-slate-500 text-sm'>Already have an account?</p>
             <Link to='/signin'>

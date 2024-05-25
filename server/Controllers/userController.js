@@ -22,7 +22,7 @@ export const signup = async(req,res,next) =>{
     try{
         await newUser.save();
         res.status(200)
-           .json('Signup successfull!');
+           .json('Account created successfully!');
     }
     catch(err){
         res.status(402)
@@ -46,12 +46,12 @@ export const signin = async(req,res,next) =>{
         return res.status(401)
                   .json('Wrong credentials!');        
         const token=jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
-        const {password:pass, ...rest}=validUser._doc;
+        //const {password:pass, ...rest}=validUser._doc;
         res.status(200)
            .cookie('access_token',token,{
             httpOnly:true,
            })
-           .json('Signin successfull!');
+           .json('Signin Successfull!');
     }
     catch(err){
         res.status(401)
@@ -63,10 +63,51 @@ export const signout=async(req,res,next)=>{
     try{
       res.clearCookie('access_token')
          .status(200)
-         .json('User has been signed out!');
+         .json('User has been Signed Out!');
     }
     catch(err){
         res.status(401)
            .json('Unable to Signout!');
+    }
+}
+
+export const google=async(req,res,next)=>{
+    const {name,email}=req.body;
+    try{
+        const user=await User.findOne({email});
+        if(user)
+        {
+            //console.log(user);
+            const token=jwt.sign({id: user._id}, process.env.JWT_SECRET);
+            //const {password, ...rest}=user._doc;
+            res.status(200)
+               .cookie('access_token',token,{
+                httpOnly:true,
+               })
+               .json('Signin Successfull!');
+        }
+        else
+        {
+            const generatedPassword=Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+            const hashedPassword=bcryptjs.hashSync(generatedPassword,10)+Math.random().toString(9).slice(-4);
+            const newUser=new User({
+                name,
+                email,
+                username:name.toLowerCase().split(' ').join(''),
+                password:hashedPassword
+            });
+            await newUser.save();
+            const token=jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
+            const {password, ...rest}=newUser._doc;
+            res.status(200)
+               .cookie('access_token',token,{
+                httpOnly:true,
+               })
+               .json('Account created successfully!');
+        }
+    }
+    catch(err){
+        res.status(401)
+           .json('Unauthorised!');
     }
 }

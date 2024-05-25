@@ -5,12 +5,11 @@ import {Link,useNavigate} from 'react-router-dom';
 import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice.js';
 import {useDispatch} from 'react-redux';
 import { toast } from 'react-toastify';
+import GoogleAuth from '../Components/GoogleAuth.jsx';
 
 export default function SignIn() {
 
   const [formData,setFormData]=useState({});
-  const [errorMessage,setErrorMessage]=useState(null);
-  const [loading,setLoading]=useState(false);
 
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -42,18 +41,15 @@ export default function SignIn() {
       {
         dispatch(signInFailure(data.message))
         //setLoading(false);
-        toast.error(data);
-        return setErrorMessage(data.message);
+        return toast.error(data);
       }   
       dispatch(signInSuccess(data));
       toast.success(data);
-      //setLoading(false);
       navigate('/');
     }
     catch(err){
       dispatch(signInFailure(err.message));
-      setErrorMessage(err.message);
-      //setLoading(false);
+      return toast.error(err.message);
     }
   }
 
@@ -74,7 +70,7 @@ export default function SignIn() {
           <input type="email" placeholder='E-mail address' className='border border-slate-600 p-3 rounded-lg' id='email' onChange={handleChange} />
           <input type="password" placeholder='Password' className='border border-slate-600 p-3 rounded-lg' id='password' onChange={handleChange} />
           <button type='submit' className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Sign In</button>
-          <button className='flex justify-center items-center gap-2 text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'><FaGoogle className='mb-1 ' />Continue with Google</button> 
+          <GoogleAuth />
           <div className='flex gap-2 items-center'>
             <p className='text-slate-500 text-sm'>Don't have an account?</p>
             <Link to='/signup'>

@@ -7,7 +7,7 @@ import userRoutes from './Routes/userRoute.js';
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL)
-        .then(()=>{ console.log("Databse connected!!"); })
+        .then(()=>{ console.log("Database connected!!"); })
         .catch((err)=>{ console.log(err) }); 
 
 const app=express();
