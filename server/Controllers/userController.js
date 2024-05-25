@@ -45,12 +45,12 @@ export const signin = async(req,res,next) =>{
         if(!validPassword)
         return res.status(401)
                   .json('Wrong credentials!');        
-        //const token=jwt.sign({id: validUser._id, isAdmin: validUser.isAdmin}, process.env.JWT_SECRET);
+        const token=jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
         const {password:pass, ...rest}=validUser._doc;
         res.status(200)
-        //    .cookie('access_token',token,{
-        //     httpOnly:true,
-        //    })
+           .cookie('access_token',token,{
+            httpOnly:true,
+           })
            .json('Signin successfull!');
     }
     catch(err){
@@ -59,4 +59,14 @@ export const signin = async(req,res,next) =>{
     }
 }
 
-export const signout = async(req,res,next) =>{}
+export const signout=async(req,res,next)=>{
+    try{
+      res.clearCookie('access_token')
+         .status(200)
+         .json('User has been signed out!');
+    }
+    catch(err){
+        res.status(401)
+           .json('Unable to Signout!');
+    }
+}

@@ -1,8 +1,37 @@
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import phoenix from '/phoenix.png'
+import {useSelector, useDispatch} from 'react-redux';
+import { signOutSuccess } from '../redux/user/userSlice.js';
+
+import { toast } from 'react-toastify';
 
 export default function Header() {
+
+  const dispatch=useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+
+  const navigate=useNavigate();
+
+  const handleSignOut=async()=>{
+    try{
+        const res=await fetch('/api/user/signout', {
+            method: 'POST',
+        });
+        const data=await res.json();
+        if(!res.ok)
+        {
+          return toast.error(data);
+        }
+        dispatch(signOutSuccess());
+        toast.success(data);
+        navigate('/signin');
+    }
+    catch(err){
+        return toast.error(err.message);
+    }
+  }
+
   return (
     <section className='flex items-center justify-around border-slate-700 border-b py-2'>
       <Link to='/'>
@@ -19,9 +48,16 @@ export default function Header() {
         <Link to='/about'>
           <li className='hidden sm:inline hover:text-[#00ff31] text-lg'>About</li>
         </Link>
-        <Link to='/signup'>
-          <button className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 pb-1 hover:text-black hover:bg-[#00ff31]'>Try Demo for Free</button>
-        </Link>
+        {
+          currentUser ? (
+            <button onClick={handleSignOut} className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 pb-1 hover:text-black hover:bg-[#00ff31]'>Sign out</button>
+          ) : (
+            <Link to='/signin'>
+              <button className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 pb-1 hover:text-black hover:bg-[#00ff31]'>Try Demo for Free</button>
+            </Link>
+          )
+        }
+        
       </ul>
     </section>
   )
