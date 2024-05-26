@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import userRoutes from './Routes/userRoute.js';
 import chatRoutes from './Routes/chatRoute.js';
+import imageRoutes from './Routes/imageRoute.js';
 
 dotenv.config();
 
@@ -25,3 +26,4 @@ app.get("/test",(req,res,next)=>{
 
 app.use("/api/user",userRoutes);
 app.use("/api/chat",chatRoutes);
+app.use("/api/image",imageRoutes);

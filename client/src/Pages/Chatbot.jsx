@@ -49,19 +49,18 @@ export default function Chatbot() {
     setFormData(e.target.value);
   }
 
-  const handleSubmit=async()=>{
-    if(!formData || formData===null || formData==='')
-    {
+  const handleSubmit = async () => {
+    if (!formData || formData === null || formData === '') {
       return toast.error('Type something...');
     }
-    const newMessage={role:'user' , content:formData , id:user.currentUser._id}; 
-    //console.log(newMessage);
-    setChatMessages([...chatMessages,newMessage]);
-    setFormData('');
-
-    const resAi=await sendChatRequest(newMessage);
-    setChatMessages([...chatMessages,newMessage,resAi]);
-  }
+    const newMessage = { role: 'user', content: formData, id: user.currentUser._id };
+    setChatMessages([...chatMessages, newMessage]);
+    setFormData(''); // Clear the input field here
+  
+    const resAi = await sendChatRequest(newMessage);
+    setChatMessages([...chatMessages, newMessage, resAi]);
+  };
+  
 
   const sendChatRequest = async(message)=>{
     try{
@@ -104,7 +103,7 @@ export default function Chatbot() {
           {
             chatMessages && chatMessages.map((chat)=>(
               <div key={chat._id}>
-                <ChatItem role={chat.role} content={chat.content} firstLetter={firstLetter} key={chat._id} />
+                <ChatItem role={chat.role} content={chat.content} firstLetter={firstLetter} />
               </div>
             ))
           }
