@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 export default function Prompt2Image() {
 
   const [formData,setFormData]=useState({});
+  const [image,setImage]=useState(null);
 
   const handleChange=(e)=>{
     setFormData({...formData,[e.target.id]:e.target.value.trim()});
@@ -14,6 +15,30 @@ export default function Prompt2Image() {
     if(!formData.prompt)
     {
       return toast.error('Enter the prompt!');
+    }
+    const req={prompt: formData.prompt, aspect_ratio: "1:1"}
+    const res=await sendImageRequest(req);
+    setImage(res);
+  }
+
+  const sendImageRequest = async(req) =>{
+    try{
+      const res=await fetch('/api/image/new',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(req)
+      });
+      console.log(res);
+      if(res.status===500)
+      return toast.error('Credit limit exceeded!');
+      if(!res.ok)
+      return toast.error('Try some custom input!');
+      const data=await res.json();
+      console.log(data);
+      return newMessage;
+    }
+    catch(err){
+      return toast.error(err);
     }
   }
   
