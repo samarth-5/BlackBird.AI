@@ -13,7 +13,7 @@ export const getOldMessages = async(req,res) => {
       res.status(200).json(chats);
     }
     catch(err){
-       next(err);
+       return (err.message);
     }
 }
 
@@ -41,7 +41,7 @@ export const generateChatCompletion = async(req,res) => {
         //console.log(text);
         existingUser.chats.push({role: "ai", content: text});
         const updatedUser=await User.findByIdAndUpdate(existingUser._id,{$set:{chats:existingUser.chats}},{new: true});
-        return res.status(200).json(updatedUser);
+        return res.status(200).json(updatedUser.chats[updatedUser.chats.length-1].content);
       }
       catch(err){
         console.log(err);
