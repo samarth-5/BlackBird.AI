@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 export default function Prompt2Image() {
 
   const [formData,setFormData]=useState({});
-  const [image,setImage]=useState(null);
+  const [image,setImage]=useState("");
 
   const handleChange=(e)=>{
     setFormData({...formData,[e.target.id]:e.target.value.trim()});
@@ -18,7 +18,8 @@ export default function Prompt2Image() {
     }
     const req={prompt: formData.prompt, aspect_ratio: "1:1"}
     const res=await sendImageRequest(req);
-    setImage(res);
+    //console.log(res.data[0]);
+    setImage(res.data[0].asset_url);
   }
 
   const sendImageRequest = async(req) =>{
@@ -28,14 +29,12 @@ export default function Prompt2Image() {
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(req)
       });
-      console.log(res);
       if(res.status===500)
       return toast.error('Credit limit exceeded!');
       if(!res.ok)
       return toast.error('Try some custom input!');
       const data=await res.json();
-      console.log(data);
-      return newMessage;
+      return data;
     }
     catch(err){
       return toast.error(err);
@@ -50,14 +49,18 @@ export default function Prompt2Image() {
       <div className='w-2/4 rounded-3xl outline outline-slate-600 hover:outline-[#00ff31] m-3'>
         <form className='flex' onSubmit={handleSubmit}>
           <input placeholder='Enter the prompt...' type="text" className='text-[#00ff31] w-full p-3 rounded-xl outline-none' id='prompt'
-                 required onChange={handleChange} onKeyDown={(e)=>{if(e.key==='Enter') handleSubmit();}} />
+                 required onChange={handleChange} onKeyDown={(e)=>{if(e.key==='Enter') handleSubmit(e);}} />
           <button type='submit' className='w-30 text-[#00ff31] text-lg outline rounded-full px-3 py-1 m-2 hover:text-black hover:bg-[#00ff31]'>Generate</button>
         </form>
       </div>
       <div className='flex justify-center items-center w-[500px] h-[500px] rounded-3xl outline outline-slate-600 hover:outline-[#00ff31] m-3'>
-        <div className='w-[200px] h-[200px]'>
-          <h3 className='text-xl text-slate-400 text-center'>"Every image starts as an idea. With the right prompt, we can paint the canvas of our imagination."</h3>
-        </div>
+        
+          {image ? (<img src={image} className='rounded-3xl hover:opacity-50' />) : (
+            <div className='w-[200px] h-[200px]'>
+              <h3 className='text-xl text-slate-400 text-center'>"Every image starts as an idea. With the right prompt, we can paint the canvas of our imagination."</h3>
+            </div>
+          )}
+        
       </div>
     </section>
   )
