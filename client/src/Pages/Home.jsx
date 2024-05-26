@@ -31,7 +31,9 @@ export default function Home() {
         <div className='flex flex-col items-center outline w-1/4 rounded-3xl hover:outline-[#00ff31]'>
           <div>
             <img src={c1} alt="img" className='rounded-t-3xl h-[220px] w-full' />
-            <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - ASTRA v-5.1</h3>
+            <Link to={currentUser ? '/chatbot' : '/signin'}>
+              <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - ASTRA v-5.1</h3>
+            </Link>
             <p className='p-3 pt-0'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati temporibus neque, odio veritatis odit molestias culpa eius iste nobis, enim molestiae? Repudiandae veniam at, commodi molestias repellat nobis quaerat inventore!
             </p>
@@ -43,12 +45,14 @@ export default function Home() {
         <div className='flex flex-col items-center outline w-1/4 rounded-3xl hover:outline-[#00ff31]'>
           <div>
             <img src={c2} alt="img" className='rounded-t-3xl h-[220px] w-full' />
-            <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - ASTRA v-5.1</h3>
+            <Link to={currentUser ? '/prompt2image' : '/signin'}>
+              <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - PREDATOR v-4.2</h3>
+            </Link>
             <p className='p-3 pt-0'>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati temporibus neque, odio veritatis odit molestias culpa eius iste nobis, enim molestiae? Repudiandae veniam at, commodi molestias repellat nobis quaerat inventore!
             </p>
           </div>
-          <Link to={currentUser ? '/chatbot' : '/signin'}>
+          <Link to={currentUser ? '/prompt2image' : '/signin'}>
             <button className='text-[#00ff31] mb-5 text-lg outline rounded-full p-2 px-5 pb-1 hover:text-black hover:bg-[#00ff31]'>Try it now !</button>
           </Link>
         </div>

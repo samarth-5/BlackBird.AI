@@ -28,7 +28,7 @@ export default function Header() {
         navigate('/signin');
     }
     catch(err){
-        return toast.error(err.message);
+        return toast.error('Internet not connected!');
     }
   }
 
