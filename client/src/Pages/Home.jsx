@@ -35,7 +35,7 @@ export default function Home() {
               <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - ASTRA v-5.1</h3>
             </Link>
             <p className='p-3 pt-0'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati temporibus neque, odio veritatis odit molestias culpa eius iste nobis, enim molestiae? Repudiandae veniam at, commodi molestias repellat nobis quaerat inventore!
+            Our Chatbot Web Application offers an intuitive, 24/7 conversational interface powered by advanced NLP, providing instant, personalized assistance for customer support, information retrieval, and more. Enjoy secure, real-time interactions tailored to your needs !
             </p>
           </div>
           <Link to={currentUser ? '/chatbot' : '/signin'}>
@@ -49,7 +49,7 @@ export default function Home() {
               <h3 className='cursor-pointer font-bold text-2xl p-3 pb-0 hover:text-[#00ff31] hover:underline'>MODEL - PREDATOR v-4.2</h3>
             </Link>
             <p className='p-3 pt-0'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati temporibus neque, odio veritatis odit molestias culpa eius iste nobis, enim molestiae? Repudiandae veniam at, commodi molestias repellat nobis quaerat inventore!
+            Dive into a world of endless possibilities with our innovative web application. Describe your vision through text, and witness as our powerful algorithms craft beautiful, bespoke images tailored to your imagination. Say goodbye to limitations and hello to boundless creativity !
             </p>
           </div>
           <Link to={currentUser ? '/prompt2image' : '/signin'}>
