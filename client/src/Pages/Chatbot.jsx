@@ -7,7 +7,7 @@ import ChatItem from '../Components/ChatItem.jsx';
 
 export default function Chatbot() {
 
-  const [formData,setFormData] = useState(null);
+  const [formData,setFormData] = useState('');
   const [chatMessages,setChatMessages] = useState([]);
 
   const user=useSelector((state)=>state.user);
@@ -27,7 +27,7 @@ export default function Chatbot() {
       setChatMessages([]);
     }
     catch(err){
-      toast.error(err);
+      toast.error(err.message);
     }
   }
 
@@ -99,10 +99,10 @@ export default function Chatbot() {
       <div className='w-3/4'>
         <h1 className='text-[40px] hover:text-[#00ff31] text-bold text-center'>MODEL - ASTRA v-5.1</h1>
         <div className='outline rounded-2xl outline-slate-600 m-1 p-1'>
-          <div className='h-[512px]'>
+          <div className='overflow-auto h-[63vh]'>
           {
-            chatMessages && chatMessages.map((chat)=>(
-              <div key={chat._id}>
+            chatMessages && chatMessages.map((chat, index)=>(
+              <div key={index || chat._id}>
                 <ChatItem role={chat.role} content={chat.content} firstLetter={firstLetter} />
               </div>
             ))

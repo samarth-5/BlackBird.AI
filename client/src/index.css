@@ -23,6 +23,7 @@ body, html {
 
 ::-webkit-scrollbar {
     width: 6px;  
+    height: 7px;
 }
   
 ::-webkit-scrollbar-track {
@@ -36,4 +37,8 @@ background: #000;
   
 ::-webkit-scrollbar-thumb:hover {
   background: #454545;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: black;
 }
