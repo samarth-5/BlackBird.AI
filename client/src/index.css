@@ -4,11 +4,21 @@
 @tailwind utilities;
 
 
-*{
-    background-color: black;
-    color: white;
+*{    
     font-family: "Josefin Sans", sans-serif;
     user-select: none;
+}
+body, html {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+.full-screen-bg {
+  background-color: black;
+  color: white;
 }
 
 ::-webkit-scrollbar {

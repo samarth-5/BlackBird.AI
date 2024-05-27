@@ -48,7 +48,7 @@ export default function SignUp() {
   }
 
   return (
-    <section className='flex items-center justify-evenly'> 
+    <section className='flex items-center justify-evenly full-screen-bg'> 
       <div>
         <h2 className='text-4xl font-extrabold mb-8'>TALK WITH A NARRATIVE <br />INTELLIGENCE EXPERT</h2>
         <ul className='flex flex-col gap-2'>
@@ -60,11 +60,11 @@ export default function SignUp() {
       </div>
       <div>
         <form onSubmit={handleSubmit} className='flex flex-col gap-4 m-16 p-10 outline outline-slate-600 rounded-xl'>
-          <input type="text" size={40} placeholder='Full Name' className='border border-slate-600 p-3 rounded-lg' id='name' onChange={handleChange} />
-          <input type="email" placeholder='E-mail address' className='border border-slate-600 p-3 rounded-lg' id='email' onChange={handleChange} />
-          <input type="name" placeholder='Username' className='border border-slate-600 p-3 rounded-lg' id='username' onChange={handleChange} />
-          <input type="password" placeholder='Password' className='border border-slate-600 p-3 rounded-lg' id='password' onChange={handleChange} />
-          <input type="password" placeholder='Re-type Password' className='border border-slate-600 p-3 rounded-lg' id='pwd' onChange={handleChange} />
+          <input type="text" size={40} placeholder='Full Name' className='bg-black border border-slate-600 p-3 rounded-lg' id='name' onChange={handleChange} />
+          <input type="email" placeholder='E-mail address' className='bg-black border border-slate-600 p-3 rounded-lg' id='email' onChange={handleChange} />
+          <input type="name" placeholder='Username' className='bg-black border border-slate-600 p-3 rounded-lg' id='username' onChange={handleChange} />
+          <input type="password" placeholder='Password' className='bg-black border border-slate-600 p-3 rounded-lg' id='password' onChange={handleChange} />
+          <input type="password" placeholder='Re-type Password' className='bg-black border border-slate-600 p-3 rounded-lg' id='pwd' onChange={handleChange} />
           <div className='flex gap-4 justify-center'>          
             <input type="checkbox" id='privacy' />
             <label className='text-sm'>I would like to receive communications from<br /> Blackbird.AI according to the Privacy Policy.**</label>

@@ -13,7 +13,7 @@ export default function Home() {
   const { currentUser } = useSelector((state) => state.user);
 
   return (
-    <section>
+    <section className='bg-black text-white'>
       <div className='flex'>
         <h1 className='z-10 m-20 ml-10 pt-10 pl-20 text-[180px] font-extrabold leading-none bg-clip-text text-transparent bg-gradient-to-b dark:from-gray-400 dark:to-[#00ff31]'>RENDER<br />THE<br />REALITY</h1>
         <img src={eagle} alt='bird' className='absolute mt-20 right-20 w-full md:w-auto md:max-w-[60%] lg:max-w-[50%] xl:max-w-[40%] z-0 opacity-80' />
@@ -58,13 +58,17 @@ export default function Home() {
         </div>
         <div className='flex flex-col items-center outline w-1/4 rounded-3xl hover:outline-[#00ff31]'>
           <img src={c3} alt="img" className='rounded-t-3xl h-[220px] w-full' />
-          <h3 className='text-center cursor-pointer font-bold text-2xl p-5 hover:text-[#00ff31] hover:underline'>More features coming soon...!!<br />
-                   Till then explore our new latest models...</h3>      
-          <FaArrowCircleRight size={50} className='cursor-pointer' />          
+          <Link to='/about'>
+            <h3 className='text-center cursor-pointer font-bold text-2xl p-5 hover:text-[#00ff31] hover:underline'>More features coming soon...!!<br />
+                     Till then explore our new latest models...</h3>      
+          </Link>
+          <Link to='/about'>
+            <FaArrowCircleRight size={50} className='cursor-pointer hover:text-[#00ff31]' />    
+          </Link>      
         </div>
       </div>
-      <div className='mb-5'>
-        <h2 className='flex justify-center text-[20px] items-center gap-2'><FaRegCopyright className='pt-1' />Made with &hearts; by Samarth</h2>
+      <div className='pb-5'>
+        <h2 className='flex justify-center text-[20px] items-center gap-2'><FaRegCopyright className='mb-1' />2024 Made with &hearts; by Samarth</h2>
       </div>
     </section>
   )

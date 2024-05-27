@@ -53,9 +53,9 @@ export default function SignIn() {
   }
 
   return (
-    <section className='flex items-center justify-evenly mt-16'> 
-      <div className='m-20'>
-        <h2 className='text-4xl font-extrabold mb-8'>TALK WITH A NARRATIVE <br />INTELLIGENCE EXPERT</h2>
+    <section className='flex items-center justify-evenly pt-16 full-screen-bg'> 
+      <div className='p-20'>
+        <h2 className='text-4xl font-extrabold pb-8'>TALK WITH A NARRATIVE <br />INTELLIGENCE EXPERT</h2>
         <ul className='flex flex-col gap-2'>
           <li className='flex text-xl gap-2'><GiSpikedBall />View of demo of our Constellation Platform</li>
           <li className='flex text-xl gap-2'><GiSpikedBall />Our application uses advanced NLP to understand and<br /> respond to user inputs in a conversational manner.</li>
@@ -65,9 +65,9 @@ export default function SignIn() {
       </div>
       <div>
         <form onSubmit={handleSubmit} className='flex flex-col gap-4 m-20 p-10 outline outline-slate-600 rounded-xl'>
-          <input size={40} type="name" placeholder='Username' className='border border-slate-600 p-3 rounded-lg' id='username' onChange={handleChange} />
-          <input type="email" placeholder='E-mail address' className='border border-slate-600 p-3 rounded-lg' id='email' onChange={handleChange} />
-          <input type="password" placeholder='Password' className='border border-slate-600 p-3 rounded-lg' id='password' onChange={handleChange} />
+          <input size={40} type="name" placeholder='Username' className='bg-black border border-slate-600 p-3 rounded-lg' id='username' onChange={handleChange} />
+          <input type="email" placeholder='E-mail address' className='bg-black border border-slate-600 p-3 rounded-lg' id='email' onChange={handleChange} />
+          <input type="password" placeholder='Password' className='bg-black border border-slate-600 p-3 rounded-lg' id='password' onChange={handleChange} />
           <button type='submit' className='text-[#00ff31] text-lg outline rounded-full p-2 px-5 hover:text-black hover:bg-[#00ff31]'>Sign In</button>
           <GoogleAuth />
           <div className='flex gap-2 items-center'>

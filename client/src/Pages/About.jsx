@@ -7,13 +7,13 @@ import { SiLeetcode } from "react-icons/si";
 
 export default function About() {
   return (
-    <div className='py-20 px-4 max-w-6xl mx-auto'>
+    <section className='my-20 mx-[200px] full-screen-bg'>
       <div>
         <img src={Samarth} alt="profile" className='h-[200px] w-[200px] rounded-full mb-5' />
       </div>
       <div className='flex justify-between'>
         <h1 className='text-3xl font-bold mb-4'>About <Link to='/'><span className='underline text-[#00ff31]'>BlackBird.AI</span></Link> (Developed by Samarth)</h1>
-        <Link to='https://samarth-dev.netlify.app/'><FaGlobe size={30} className='text-[#00ff31] mr-5' /></Link>
+        <Link target="_blank" to='https://samarth-dev.netlify.app/'><FaGlobe size={30} className='text-[#00ff31] mr-5' /></Link>
       </div>
       <p className='mb-4'>BlackBird.AI is your gateway to innovative AI solutions, offering an intuitive platform that combines advanced chatbot interactions and 
                           image generation capabilities. Powered by the Gemini API, our intelligent chatbot engages users in natural, context-aware conversations, 
@@ -31,6 +31,6 @@ export default function About() {
         <Link target="_blank" to='https://leetcode.com/u/samarth_123_/' className='hover:scale-150 duration-500'><SiLeetcode size={25} className='hover:text-[#00ff31]' /></Link>
         <Link target="_blank" to='https://www.instagram.com/samarth123_/' className='hover:scale-150 duration-500'><FaInstagram size={25} className='hover:text-[#00ff31]' /></Link>
       </div>
-    </div>
+    </section>
   )
 };

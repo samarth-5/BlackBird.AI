@@ -63,7 +63,7 @@ export default function Prompt2Image() {
   };
 
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center full-screen-bg">
       <div>
         <h3 className="p-5 text-[40px] hover:text-[#00ff31] text-bold mt-2">MODEL - PREDATOR.ai v-4.2</h3>
       </div>
@@ -72,7 +72,7 @@ export default function Prompt2Image() {
           <input
             placeholder="Enter the prompt..."
             type="text"
-            className="text-[#00ff31] w-full p-3 rounded-xl outline-none"
+            className="text-[#00ff31] w-full p-3 rounded-xl outline-none bg-black"
             id="prompt"
             required
             value={formData.prompt}

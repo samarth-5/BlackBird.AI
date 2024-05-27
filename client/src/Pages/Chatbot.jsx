@@ -82,7 +82,7 @@ export default function Chatbot() {
   }
 
   return (
-    <section className='m-10 flex gap-12'>
+    <section className='p-10 flex gap-12 full-screen-bg'>
       <div className='flex flex-col gap-16 w-1/4'>
         <div className='outline rounded-2xl outline-slate-600 p-10 gap-5 flex flex-col'>
           <h3 className='text-2xl font-bold'>You are talking to a CHATBOT !!</h3>
@@ -109,9 +109,9 @@ export default function Chatbot() {
           }
           </div>          
           <div className='flex items-center rounded-xl outline outline-slate-600 hover:outline-[#00ff31] m-2'>
-            <input placeholder='Type your message...' type="text" className='text-[#00ff31] w-full p-3 rounded-xl outline-none'
+            <input placeholder='Type your message...' type="text" className='bg-black text-[#00ff31] w-full p-3 rounded-xl outline-none'
                    required onChange={handleChange} value={formData} onKeyDown={(e)=>{if(e.key==='Enter') handleSubmit();}} />
-            <BiSend size={40} className='pr-2 hover:text-green cursor-pointer' onClick={handleSubmit} />
+            <BiSend size={40} className='pr-2 hover:text-[#00ff31] cursor-pointer' onClick={handleSubmit} />
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ export default function Header() {
   }
 
   return (
-    <section className='flex items-center justify-around border-slate-700 border-b py-2'>
+    <section className='flex items-center justify-around border-slate-700 border-b py-2 full-screen-bg'>
       <Link to='/'>
         <div className='flex items-center gap-2'>
           <img src={phoenix} height={60} width={60} alt="logo" />
