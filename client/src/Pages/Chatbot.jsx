@@ -110,7 +110,7 @@ export default function Chatbot() {
           </div>          
           <div className='flex items-center rounded-xl outline outline-slate-600 hover:outline-[#00ff31] m-2'>
             <input placeholder='Type your message...' type="text" className='text-[#00ff31] w-full p-3 rounded-xl outline-none'
-                   required onChange={handleChange} onKeyDown={(e)=>{if(e.key==='Enter') handleSubmit();}} />
+                   required onChange={handleChange} value={formData} onKeyDown={(e)=>{if(e.key==='Enter') handleSubmit();}} />
             <BiSend size={40} className='pr-2 hover:text-green cursor-pointer' onClick={handleSubmit} />
           </div>
         </div>
