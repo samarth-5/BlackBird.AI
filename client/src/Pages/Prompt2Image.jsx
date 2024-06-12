@@ -9,7 +9,7 @@ export default function Prompt2Image() {
   const [downloadHover, setDownloadHover] = useState(false); // New state to track download button hover
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -48,18 +48,12 @@ export default function Prompt2Image() {
         'Content-Type': 'application/octet-stream',
       },
     })
-      .then((response) => response.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = 'image.jpeg';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      })
-      .catch((error) => console.error('Image download error:', error));
+    .then(response => response.json())
+    .then(data => {
+      const downloadUrl = data.downloadUrl;
+      window.location.href = downloadUrl;
+    })
+    .catch(error => console.error(error));
   };
 
   return (
@@ -69,28 +63,20 @@ export default function Prompt2Image() {
       </div>
       <div className="w-2/4 rounded-3xl outline outline-slate-600 hover:outline-[#00ff31] m-3">
         <form className="flex" onSubmit={handleSubmit}>
-          <input
-            placeholder="Enter the prompt..."
-            type="text"
+          <input placeholder="Enter the prompt..." type="text"
             className="text-[#00ff31] w-full p-3 rounded-xl outline-none bg-black"
-            id="prompt"
-            required
-            value={formData.prompt}
-            onChange={handleChange}
+            id="prompt" required value={formData.prompt} onChange={handleChange} autoComplete='off'
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleSubmit(e);
-            }}
-          />
+            }} />
           <button type="submit" className="w-30 text-[#00ff31] text-lg outline rounded-full px-3 py-1 m-2 hover:text-black hover:bg-[#00ff31]">
             Generate
           </button>
         </form>
       </div>
-      <div
-        className="flex justify-center items-center w-[500px] h-[500px] rounded-3xl outline outline-slate-600 hover:outline-[#00ff31] m-3"
+      <div className="flex justify-center items-center w-[500px] h-[500px] rounded-3xl outline outline-slate-600 hover:outline-[#00ff31] m-3"
         onMouseEnter={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-      >
+        onMouseLeave={() => setHover(false)}>
         {image ? (
           <>
             <img src={image} className={`rounded-3xl ${downloadHover ? 'opacity-50' : 'hover:opacity-50'}`} />

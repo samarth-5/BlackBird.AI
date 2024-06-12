@@ -23,7 +23,7 @@ export const imageGeneration = async(req,res) =>{
         );
       
         const data = await resp.json();
-        //console.log(data);
+        console.log(data);
         return res.status(200)
                   .json(data);
       }      
