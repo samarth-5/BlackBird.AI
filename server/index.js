@@ -6,6 +6,8 @@ import userRoutes from './Routes/userRoute.js';
 import chatRoutes from './Routes/chatRoute.js';
 import imageRoutes from './Routes/imageRoute.js';
 
+import cors from 'cors';
+
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL)
@@ -15,6 +17,12 @@ mongoose.connect(process.env.MONGO_URL)
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL, // Replace with your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}));
 
 app.listen(process.env.PORT, ()=>{
     console.log('Server is running on port 3000!!');
