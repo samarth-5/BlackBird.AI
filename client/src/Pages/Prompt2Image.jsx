@@ -27,7 +27,7 @@ export default function Prompt2Image() {
 
   const sendImageRequest = async (req) => {
     try {
-      const res = await fetch('/api/image/new', {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/image/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(req),

@@ -29,7 +29,7 @@ export default function SignIn() {
         dispatch(signInStart());
         // setLoading(true);
         // setErrorMessage(null);
-        const res=await fetch('/api/user/signin',{
+        const res=await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/signin`,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(formData),
