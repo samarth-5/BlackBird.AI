@@ -22,7 +22,7 @@ export default function GoogleAuth() {
         try{
             const resultsFromGoogle=await signInWithPopup(auth,provider);
             //console.log(resultsFromGoogle);
-            const res=await fetch('/api/user/google',{
+            const res=await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/google`,{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
