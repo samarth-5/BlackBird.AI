@@ -16,7 +16,7 @@ export default function Chatbot() {
 
   const handleDelete=async()=>{
     try{
-      const res=await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/delete/${user.currentUser._id}`,{
+      const res=await fetch(`/api/chat/delete/${user.currentUser._id}`,{
         method:'PUT',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(user)
@@ -34,7 +34,7 @@ export default function Chatbot() {
   useEffect(()=>{
     const getOldMessages=async()=>{
       try{
-        const res=await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/old/${user.currentUser._id}`);
+        const res=await fetch(`/api/chat/old/${user.currentUser._id}`);
         const data=await res.json();
         setChatMessages(data);
       }
@@ -64,7 +64,7 @@ export default function Chatbot() {
 
   const sendChatRequest = async(message)=>{
     try{
-      const res=await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/chat/new`,{
+      const res=await fetch('/api/chat/new',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify(message)

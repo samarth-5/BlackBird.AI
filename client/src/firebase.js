@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: "AIzaSyCImeVtHxKJxbQX2VEfLStUzqbgPyyYKZQ",
   authDomain: "blackbirdai.firebaseapp.com",
   projectId: "blackbirdai",
   storageBucket: "blackbirdai.appspot.com",

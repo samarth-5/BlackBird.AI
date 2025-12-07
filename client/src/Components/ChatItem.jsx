@@ -7,23 +7,19 @@ export default function ChatItem({ role, content, firstLetter }) {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to the bottom of the chat item component
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
   }, [content]);
 
   const extractCodeFromString = (message) => {
-    if (message.includes('```')) {
-      const blocks = message.split('```');
-      return blocks;
-    }
-    return null;
+    if (typeof message !== "string") return null;
+    if (!message.includes("```")) return null;
+    return message.split("```");
   };
 
   const isCodeBlock = (str) => {
-    // Check if the string contains characters commonly found in code
-    return /[\[\]{}=;#]/.test(str);
+    return typeof str === "string" && /[\[\]{}=;#]/.test(str);
   };
 
   const messageBlocks = extractCodeFromString(content);
@@ -33,12 +29,14 @@ export default function ChatItem({ role, content, firstLetter }) {
       {role === 'ai' ? (
         <div className='flex mx-1 my-2 gap-2' ref={scrollRef}>
           <img src={phoenix} alt="ai" className='h-9 w-9 text-center mt-2 outline outline-[#00ff31] rounded-full' />
-          <div className="p-2 flex  text-black bg-[#00ff31] rounded-2xl flex-col w-full">
-            <div style={{ alignSelf: 'flex-start' }} className="mt-2" ref={scrollRef}></div>
+          
+          <div className="p-2 flex text-black bg-[#00ff31] rounded-2xl flex-col w-full">
+            <div style={{ alignSelf: 'flex-start' }} className="mt-2"></div>
+
             {messageBlocks ? (
               messageBlocks.map((block, index) =>
                 isCodeBlock(block) ? (
-                  <SyntaxHighlighter key={ChatItem._id || index} style={coldarkDark} language="javascript">
+                  <SyntaxHighlighter key={index} style={coldarkDark} language="javascript">
                     {block}
                   </SyntaxHighlighter>
                 ) : (

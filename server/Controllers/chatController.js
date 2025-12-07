@@ -1,5 +1,5 @@
 import User from "../Models/userModel.js";
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from "@google/genai";
 
 export const getOldMessages = async(req,res) => {
     try{
@@ -27,18 +27,18 @@ export const generateChatCompletion = async(req,res) => {
     }
     existingUser.chats.push({role: "user", content: req.body.content});
 
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+    //const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+    const ai = new GoogleGenAI({});
+
     async function run() 
     {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-
       const prompt = req.body.content;
-
       try{        
-        const result = await model.generateContent(prompt);
-        const response = result.response;
-        const text = response.text();
-        //console.log(text);
+          const response = await ai.models.generateContent({
+          model: "gemini-2.5-flash",
+          contents: prompt,
+        });
+        const text = response.text;
         existingUser.chats.push({role: "ai", content: text});
         const updatedUser=await User.findByIdAndUpdate(existingUser._id,{$set:{chats:existingUser.chats}},{new: true});
         return res.status(200).json(updatedUser.chats[updatedUser.chats.length-1].content);

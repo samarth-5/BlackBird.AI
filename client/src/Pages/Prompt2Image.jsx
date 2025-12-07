@@ -19,15 +19,15 @@ export default function Prompt2Image() {
     }
     const req = { prompt: formData.prompt, aspect_ratio: '1:1' };
     setFormData({prompt:''});
-    const res = await sendImageRequest(req);        
-    if (res.status === 403) 
+    const res = await sendImageRequest(req);      
+    if (res.status === 403 || res.status === 400) 
     return toast.error('Credit limit exceeded!');
     setImage(res.data[0].asset_url);
   };
 
   const sendImageRequest = async (req) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/image/new`, {
+      const res = await fetch('/api/image/new', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(req),
